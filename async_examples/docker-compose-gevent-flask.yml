@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  gevent_flask_app:
+    init: true
+    build:
+      context: ./gevent_flask_app
+      dockerfile: Dockerfile
+    environment:
+      - PORT_APP=3000
+      - PORT_API=4000
+      - THREADS=without
+    ports:
+      - "127.0.0.1:3002:3002"
+    depends_on:
+      - slow_api
+
+  slow_api:
+    init: true
+    build: ./slow_api
+    expose:
+      - "8051"

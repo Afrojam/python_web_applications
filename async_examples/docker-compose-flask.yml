@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  flask_app:
+    init: true
+    build:
+      context: ./flask_app
+      dockerfile: Dockerfile
+    environment:
+      - PORT_APP=3000
+      - PORT_API=4000
+      - THREADS=without
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - slow_api
+
+  flask_app_threaded: # extends: flask_app
+    init: true
+    build:
+      context: ./flask_app
+      dockerfile: Dockerfile
+    environment:
+      - PORT_APP=3001
+      - PORT_API=4000
+      - THREADS=with
+    ports:
+      - "127.0.0.1:3001:3001"
+    depends_on:
+      - slow_api
+
+  slow_api:
+    init: true
+    build: ./slow_api
+    expose:
+      - "8051"
