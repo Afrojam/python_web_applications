@@ -1,15 +1,14 @@
 version: "3.7"
 services:
-  gevent_flask_app:
+  fastapi_app:
     init: true
     build:
-      context: ./gevent_flask_app
+      context: ./fastapi_app
       dockerfile: Dockerfile
     environment:
-      - PORT_APP=3002
-      - THREADS=with
+      - PORT_APP=3003
     ports:
-      - "127.0.0.1:3002:3002"
+      - "127.0.0.1:3003:3003"
     depends_on:
       - slow_api
 

@@ -6,6 +6,7 @@ COPY app.py /app.py
 
 ENV FLASK_APP=app
 
-CMD flask run --no-reload \
-  --$THREADS-threads \
-  --host 0.0.0.0 --port $PORT_APP
+CMD python app.py
+#CMD flask run --no-reload \
+#  --$THREADS-threads \
+#  --host 0.0.0.0 --port $PORT_APP
