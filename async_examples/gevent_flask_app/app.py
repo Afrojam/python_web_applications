@@ -1,7 +1,8 @@
+from gevent import monkey
+
+monkey.patch_all()
 import os
 
-from gevent import monkey
-monkey.patch_all()
 from gevent import pywsgi
 import requests
 from flask import Flask, request
@@ -16,6 +17,7 @@ def index():
     delay = float(request.args.get('delay') or 1)
     resp = requests.get(f'{api_url}?delay={delay}')
     return 'Hi there! ' + resp.text
+
 
 if __name__ == "__main__":
     server = pywsgi.WSGIServer(("0.0.0.0", int(os.environ["PORT_APP"])), app)

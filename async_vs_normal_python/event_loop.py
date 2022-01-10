@@ -4,6 +4,7 @@ from collections import deque
 # The generator thing
 def countdown(n):
     while n > 0:
+        # Pass execution to another task
         yield n
         n -= 1
 
@@ -14,6 +15,7 @@ tasks.extend([countdown(10), countdown(5), countdown(20)])
 
 def run():
     while tasks:
+        # The event loop
         task = tasks.popleft()
         try:
             x = next(task)
